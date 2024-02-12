@@ -20,12 +20,20 @@ class Register extends React.Component {
     });
   };
 
-  handleRegisterSubmit = () => {
+  handleRegisterSubmit = async () => {
     const { email, password } = this.state;
-    this.props.registerAPI({
-      email: email,
-      password: password,
-    });
+    const res = await this.props
+      .registerAPI({
+        email: email,
+        password: password,
+      })
+      .catch((err) => err);
+    if (res) {
+      this.setState({
+        email: "",
+        password: "",
+      });
+    }
   };
   render() {
     return (
@@ -40,6 +48,7 @@ class Register extends React.Component {
             id="email"
             placeholder="Email"
             onChange={this.handleChangeText}
+            value={this.state.email}
             loading={this.props.isLoading}
           />
           <Input
@@ -48,6 +57,7 @@ class Register extends React.Component {
             id="password"
             placeholder="Password"
             onChange={this.handleChangeText}
+            value={this.state.password}
             loading={this.props.isLoading}
           />
           <Button
