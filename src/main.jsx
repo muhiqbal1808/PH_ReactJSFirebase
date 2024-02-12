@@ -1,13 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./containers/pages/App";
-import firebase from "./config/firebase";
+import analytics from "./config/firebase";
 
-console.log("Config Firebae ===>", firebase);
+import { RouterProvider } from "react-router-dom";
+import { router } from "./routes";
+
+console.log("Config Firebae ===>", analytics);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
